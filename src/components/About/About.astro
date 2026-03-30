@@ -15,7 +15,7 @@ import Badge from "../UI/Badge.astro";
             <div class="absolute -inset-1 rounded-2xl"></div>
             <div class="relative">
                 <img
-                    src="/images/myface.jpg"
+                    src="/images/myface1.jpg"
                     alt={`${PERSONAL_INFO.name} Portrait`}
                     class="rounded-2xl w-full max-w-sm object-cover"
                 />
@@ -28,7 +28,7 @@ import Badge from "../UI/Badge.astro";
                 {PERSONAL_INFO.title}
             </Title>
             <p
-                class="text-lg md:text-xl text-gray-300 leading-relaxed font-light"
+                class="text-lg md:text-xl text-gray-300 leading-relaxed font-light whitespace-pre-line"
             >
                 Hi! I'm <span class="text-white font-semibold"
                     >{PERSONAL_INFO.name}</span
@@ -36,15 +36,15 @@ import Badge from "../UI/Badge.astro";
                 {PERSONAL_INFO.description}
             </p>
             <p
-                class="text-lg md:text-xl text-gray-300 leading-relaxed font-light"
+                class="text-lg md:text-xl text-gray-300 leading-relaxed font-light whitespace-pre-line"
             >
                 {PERSONAL_INFO.journey}
             </p>
-            <div class="flex flex-wrap gap-4 mt-4">
+            <div class="flex flex-wrap gap-2 mt-4">
                 {
                     PERSONAL_INFO.skills &&
                         PERSONAL_INFO.skills.map((skill) => (
-                            <Badge class="px-4 py-2 bg-white/5 text-sm text-gray-400">
+                            <Badge class="px-4 py-2 bg-white/5 text-sm md:text-base text-gray-300 border-white/20 shadow-lg">
                                 {skill}
                             </Badge>
                         ))
