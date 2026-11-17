@@ -1,12 +1,18 @@
 export const PERSONAL_INFO = {
     name: "Suchao",
-    title: "Junior Developer พร้อมลุยงาน | หาโอกาสร่วมงาน / Freelance / Part-time",
-    description: "สวัสดีครับพี่ๆ ทุกคน! ผมชื่อ สุเชาว์ อายุ 23 ปี เพิ่งเรียนจบสายวิทย์คอมพิวเตอร์ครับ สิ่งที่ผมมองหาคือโอกาสร่วมงานทำโปรเจกต์ ทั้งงาน Support ทีม งาน Freelance หรืองาน Part-time เพื่อสะสมประสบการณ์ให้ตัวเองเก่งขึ้นครับ\n\nผมรู้ตัวว่าประสบการณ์ยังน้อย เลยยินดีรับค่าตอบแทนที่คุณพิจารณาได้อย่างเป็นกันเองเลยครับ ผมพร้อมและเต็มที่กับทุกโอกาสเสมอ\n\nรูปแบบการทำงานของผม:\nผมเน้นมองหาวิธีการที่ \"ง่ายและเวิร์กที่สุด\" เพื่อให้ได้ผลลัพธ์ที่ดี พื้นฐานความเข้าใจสำคัญที่สุด ผมใช้ AI เข้ามาช่วย Recheck และเป็นผู้ช่วยเสมอ โดยผมมีกฎว่า \"จะทำความเข้าใจโค้ดที่ AI แนะนำก่อนทุกครั้ง ถ้าไม่เข้าใจก็จะไม่เอามาใช้ในงานเด็ดขาด\"\nผมเชื่อว่าเครื่องมืออาจเปลี่ยนไปเรื่อยๆ แต่หลักการยังคล้ายกัน การเข้าใจความแตกต่างของแต่ละ Tool คือสิ่งที่สำคัญที่สุดครับ!",
-    journey: `ประสบการณ์และโปรเจกต์ที่ผ่านมา:
-- ฝึกงานเชียงใหม่ (2 เดือน) ทำเว็บไซต์บริษัท, Landing Page แก้ไขงาน CRUD ทั่วไป เรียนรู้ Framework และการทำเว็บไซต์จริง
-- ฝึกงานนนทบุรี (4 เดือน) ทำ Frontend ด้วย Angular ในระบบบัญชี ฝึกการคิด Logic ฝ่า Algorithm ซับซ้อน และเรียนรู้ Soft Skill ในการสื่อสารกับทีม`,
-    skills: ["JS/TS", "Next.js / React / Angular", "Node.js / Express", "Nuxt / Vue", "PHP / MySQL / Postgres", "Docker", "เรียนรู้ไว"],
-    heroDescription: "สวัสดีครับ! ผมสุเชาว์ เด็กจบใหม่สาย Dev อายุ 23 ปี ผมพร้อมเปิดรับงาน Freelance/Part-time หรือร่วมงานในทีมเพื่อเรียนรู้ประสบการณ์และพัฒนาตัวเองครับ!",
+    fullName: "สุเชาว์ หม่อโป๊ะกู่",
+    role: "Full-Stack Developer",
+    availability: "เปิดรับงาน · Full-time / Freelance",
+    photo: "/images/myface1.jpg",
+    title: "Full-Stack Developer | ทำงานจริงกับทีม + ปล่อยโปรเจกต์ขึ้น production เอง",
+    description: "Full-Stack Developer จบวิทยาการคอมพิวเตอร์ (เกรด 3.73) มีประสบการณ์ราว 1 ปีจากงาน part-time และฝึกงานสองที่ ชอบรับผิดชอบงานตั้งแต่ทำความเข้าใจผู้ใช้จนปล่อยขึ้นใช้งานจริง\n\nรูปแบบการทำงานของผม:\nมองหาวิธีที่ \"ง่ายและเวิร์กที่สุด\" ก่อนเสมอ ใช้ AI (Claude Code, Codex, Antigravity) เป็นผู้ช่วยทุกวัน แต่มีกฎว่า \"จะไม่ใช้โค้ดที่ AI เขียนถ้ายังไม่เข้าใจมัน\" เพราะเครื่องมือเปลี่ยนได้ แต่พื้นฐานคือสิ่งที่ติดตัว",
+    journey: `ประสบการณ์:
+- Empty Space (part-time, 6 เดือน) ทำกว่า 100 ticket ในแพลตฟอร์ม interactive story ทั้ง story creator, player, ระบบ admin, security และ Open Graph
+- Business Competitive Intelligence (ฝึกงาน 4 เดือน) Frontend ด้วย Angular ในระบบบัญชี และย้ายเว็บบริษัทเป็น Next.js
+- Chiangmaizone (ฝึกงาน 2 เดือน) เว็บแอป CRUD และระบบ admin ด้วย CodeIgniter
+- ล่าสุด: KhuiAnime เว็บคุยอนิเมะ ทำเองทั้งระบบจนขึ้น khuianime.com พร้อม CI/CD, VPS และ Cloudflare`,
+    skills: ["TypeScript", "React / Next.js", "Angular", "Node.js / Express", "PostgreSQL / MySQL", "Drizzle ORM", "Docker / VPS", "Cloudflare R2", "GitHub Actions CI/CD", "AI-assisted dev"],
+    heroDescription: "ทำเว็บตั้งแต่ UX/UI จนขึ้น production จริง มีประสบการณ์ 1 ปีในทีม และล่าสุดปล่อย KhuiAnime ขึ้น khuianime.com เองทั้งระบบ ตั้งแต่ CI/CD ไปจนถึง VPS และ Cloudflare",
     resumeUrl: "/resume",
     socialLinks: [
         { href: "https://github.com/Suchao001", label: "GitHub", icon: "lucide:github" },

@@ -1,56 +1,62 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const versions = [
+  { id: "th", label: "ภาษาไทย", img: "/resume/resume-th.jpg", pdf: "/resume/suchao-resume-th.pdf" },
+  { id: "en", label: "English", img: "/resume/resume-en.jpg", pdf: "/resume/suchao-resume-en.pdf" },
+];
 ---
 
 <Layout>
   <div class="pt-32 pb-20 min-h-screen">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10" data-aos="fade-up">
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
           My <span class="text-transparent bg-clip-text bg-linear-to-r from-[#0debd8] to-[#870deb]">Resume</span>
         </h1>
         <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-          View my full resume below.
+          ดูออนไลน์หรือดาวน์โหลดเป็น PDF ได้ทั้งภาษาไทยและอังกฤษ
         </p>
       </div>
 
-      <div class="flex flex-col gap-8 items-center justify-center">
-        <div class="w-full relative group rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(135,13,235,0.2)] border border-white/10" data-aos="fade-up" data-aos-delay="100">
-          <img 
-            src="/projects/resume/1.jpg" 
-            alt="Resume Page 1" 
-            class="w-full h-auto object-contain bg-white"
-            loading="lazy"
-          />
+      <div data-aos="fade-up" data-aos-delay="100">
+        {versions.map((v, i) => (
+          <input type="radio" name="resume-lang" id={`resume-${v.id}`} class="sr-only" checked={i === 0} />
+        ))}
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+          {versions.map((v) => (
+            <label for={`resume-${v.id}`} class={`tab tab-${v.id} cursor-pointer px-5 py-2 rounded-full border border-white/15 text-gray-300 transition hover:border-white/40`}>
+              {v.label}
+            </label>
+          ))}
+          <span class="hidden sm:block w-px h-6 bg-white/10 mx-1"></span>
+          {versions.map((v) => (
+            <a
+              href={v.pdf}
+              download
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-secondary text-white text-sm font-semibold transition"
+            >
+              <Icon name="lucide:download" class="size-4" />
+              PDF ({v.id.toUpperCase()})
+            </a>
+          ))}
         </div>
-        
-        <div class="w-full relative group rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(135,13,235,0.2)] border border-white/10" data-aos="fade-up" data-aos-delay="200">
-          <img 
-            src="/projects/resume/2.jpg" 
-            alt="Resume Page 2" 
-            class="w-full h-auto object-contain bg-white"
-            loading="lazy"
-          />
-        </div>
-        
-        <div class="w-full relative group rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(135,13,235,0.2)] border border-white/10" data-aos="fade-up" data-aos-delay="300">
-          <img 
-            src="/projects/resume/3.jpg" 
-            alt="Resume Page 3" 
-            class="w-full h-auto object-contain bg-white"
-            loading="lazy"
-          />
-        </div>
+
+        {versions.map((v) => (
+          <div class={`sheet sheet-${v.id} rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(135,13,235,0.2)] border border-white/10`}>
+            <img src={v.img} alt={`Resume (${v.label})`} class="w-full h-auto bg-white" />
+          </div>
+        ))}
       </div>
 
-      <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="400">
-        <a 
-          href="/" 
-          class="inline-flex items-center justify-center px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-full transition-all duration-300 border border-white/10 hover:border-white/30 hover:scale-105"
+      <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="200">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-full transition-all duration-300 border border-white/10 hover:border-white/30 hover:scale-105"
         >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
+          <Icon name="lucide:arrow-left" class="size-5" />
           Back to Home
         </a>
       </div>
@@ -59,7 +65,13 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
-  .text-shadow-purple {
-    text-shadow: 2px 2px 0 #870deb;
+  .sheet { display: none; }
+  #resume-th:checked ~ .sheet-th,
+  #resume-en:checked ~ .sheet-en { display: block; }
+  #resume-th:checked ~ div .tab-th,
+  #resume-en:checked ~ div .tab-en {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
   }
 </style>

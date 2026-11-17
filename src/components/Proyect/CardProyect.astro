@@ -15,9 +15,10 @@ interface Props {
     link?: string;
     github?: string;
     githubAdmin?: string;
+    liveUrl?: string;
 }
 
-const { image, title, description, tags, link, github, githubAdmin } = Astro.props;
+const { image, title, description, tags, link, github, githubAdmin, liveUrl } = Astro.props;
 ---
 
 <article
@@ -83,6 +84,14 @@ const { image, title, description, tags, link, github, githubAdmin } = Astro.pro
                     <LinkButton href={githubAdmin}>
                         <Icon name="lucide:github" class="size-5" />
                         Admin Code
+                    </LinkButton>
+                )
+            }
+            {
+                liveUrl && (
+                    <LinkButton href={liveUrl}>
+                        <Icon name="lucide:globe" class="size-4" />
+                        Live Site
                     </LinkButton>
                 )
             }

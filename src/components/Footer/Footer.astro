@@ -1,25 +1,35 @@
 ---
 import { Icon } from "astro-icon/components";
+import { PERSONAL_INFO } from "../../data/personal";
+
+const year = new Date().getFullYear();
 ---
 
-<footer class="py-12 border-t border-white/5 bg-gray-950/50 backdrop-blur-sm">
-    <div
-        class="max-w-7xl mx-auto px-6 flex flex-row items-center justify-center gap-4 text-center"
-    >
-        <p class="text-gray-400 text-sm md:text-base">
-            Developed with love by <span class="text-white font-medium italic"
-                >Lautaro Rodriguez Collins</span
-            >
+<footer class="py-10 border-t border-white/5 bg-gray-950/50 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
+        <p class="text-gray-400 text-sm">
+            © {year} <span class="text-white font-medium">Suchao Mopoku</span> · Built with Astro
         </p>
 
-        <a
-            href="https://github.com/Lautaro-R-collins"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95"
-            aria-label="Lautaro Rodriguez's GitHub"
-        >
-            <Icon name="lucide:github" class="size-6" />
-        </a>
+        <div class="flex items-center gap-5">
+            {
+                PERSONAL_INFO.socialLinks.map((link) => (
+                    <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-white transition"
+                        aria-label={link.label}
+                    >
+                        <Icon name={link.icon} class="size-5" />
+                    </a>
+                ))
+            }
+        </div>
+
+        <p class="text-gray-500 text-xs">
+            Template base by
+            <a href="https://github.com/Lautaro-R-collins" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-300">Lautaro Rodriguez Collins</a>
+        </p>
     </div>
 </footer>

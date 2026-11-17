@@ -1,35 +1,153 @@
 ---
+import { Icon } from "astro-icon/components";
 import Links from "../Links/Links.astro";
-import Title from "../UI/Title.astro";
 import { PERSONAL_INFO } from "../../data/personal";
+
+const TECH = [
+  { name: "Next.js", icon: "simple-icons:nextdotjs" },
+  { name: "React", icon: "simple-icons:react" },
+  { name: "TypeScript", icon: "simple-icons:typescript" },
+  { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
+  { name: "Node.js", icon: "simple-icons:nodedotjs" },
+  { name: "Express", icon: "simple-icons:express" },
+  { name: "Angular", icon: "simple-icons:angular" },
+  { name: "PostgreSQL", icon: "simple-icons:postgresql" },
+  { name: "MySQL", icon: "simple-icons:mysql" },
+  { name: "Drizzle", icon: "simple-icons:drizzle" },
+  { name: "Docker", icon: "simple-icons:docker" },
+  { name: "Linux VPS", icon: "simple-icons:linux" },
+  { name: "Cloudflare", icon: "simple-icons:cloudflare" },
+  { name: "GitHub Actions", icon: "simple-icons:githubactions" },
+  { name: "Figma", icon: "simple-icons:figma" },
+  { name: "Claude Code", icon: "simple-icons:claude" },
+];
 ---
 
-<header
-  id="home"
-  class="relative h-screen flex flex-col items-center justify-center text-center px-4"
->
-  <main class="relative z-10 flex flex-col items-center">
-    <Title level={1} animate={true}>
-      Hi, I'm {PERSONAL_INFO.name}
-    </Title>
-    <p
-      class="text-lg md:text-2xl text-white mb-8 max-w-2xl font-medium"
-      data-aos="fade-up"
-      data-aos-delay="200"
-    >
-      {PERSONAL_INFO.heroDescription}
-    </p>
-    <div data-aos="fade-up" data-aos-delay="400">
-      <Links />
+<header id="home" class="relative min-h-screen flex flex-col justify-center pt-28 pb-10">
+  <div class="max-w-6xl mx-auto w-full px-6 grid md:grid-cols-[1.25fr_0.75fr] gap-12 md:gap-8 items-center">
+    <!-- Text -->
+    <div class="order-2 md:order-1 text-center md:text-left">
+      <span class="hero-in inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full border border-emerald-400/30 bg-emerald-400/10 text-emerald-300 text-sm font-medium">
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-emerald-400"></span>
+        </span>
+        {PERSONAL_INFO.availability}
+      </span>
+
+      <p class="hero-in text-gray-400 text-lg mb-2" style="--d: 60ms">สวัสดีครับ ผม</p>
+      <h1 class="hero-in text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-3" style="--d: 120ms">
+        {PERSONAL_INFO.fullName}
+      </h1>
+      <p class="hero-in text-2xl md:text-3xl font-semibold mb-6 bg-clip-text text-transparent bg-linear-to-r from-[#a78bfa] to-[#0debd8]" style="--d: 180ms">
+        {PERSONAL_INFO.role}
+      </p>
+      <p class="hero-in text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl mx-auto md:mx-0 mb-8" style="--d: 240ms">
+        {PERSONAL_INFO.heroDescription}
+      </p>
+
+      <div class="hero-in flex flex-wrap items-center justify-center md:justify-start gap-3 mb-8" style="--d: 300ms">
+        <a
+          href="/#projects"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-secondary text-white font-semibold transition drop-shadow-[2px_2px_0_#0debd8] active:translate-0.5 active:drop-shadow-none"
+        >
+          ดูผลงาน
+          <Icon name="lucide:arrow-down" class="size-4" />
+        </a>
+        <a
+          href={PERSONAL_INFO.resumeUrl}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/5 text-white font-semibold transition"
+        >
+          <Icon name="lucide:file-text" class="size-4" />
+          Resume
+        </a>
+      </div>
+
+      <div class="hero-in flex justify-center md:justify-start" style="--d: 360ms">
+        <Links />
+      </div>
     </div>
-    <a
-      href={PERSONAL_INFO.resumeUrl}
-      class="px-6 py-3 bg-primary hover:bg-secondary text-white font-semibold rounded-3xl transition-all duration-150
-      drop-shadow-[2px_2px_0_#0debd8] active:translate-0.5 active:drop-shadow-none"
-      data-aos="fade-up"
-      data-aos-delay="600"
-    >
-      Resume
-    </a>
-  </main>
+
+    <!-- Photo -->
+    <div class="order-1 md:order-2 relative mx-auto hero-in" style="--d: 100ms">
+      <div class="absolute -inset-6 rounded-full bg-linear-to-tr from-[#7836cf]/50 via-[#7836cf]/10 to-[#0debd8]/40 blur-3xl" aria-hidden="true"></div>
+      <img
+        src={PERSONAL_INFO.photo}
+        alt={`รูปของ ${PERSONAL_INFO.fullName}`}
+        width="1080"
+        height="1080"
+        class="relative size-56 md:size-80 object-cover rounded-[2.5rem] border border-white/15 shadow-2xl rotate-2"
+        fetchpriority="high"
+      />
+      <a
+        href="https://khuianime.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="float-card absolute -bottom-5 -left-6 md:-left-14 flex items-center gap-3 px-4 py-3 rounded-2xl bg-gray-900/85 backdrop-blur border border-white/10 shadow-xl hover:border-[#0debd8]/50 transition"
+      >
+        <span class="grid place-items-center size-9 rounded-xl bg-blue-500/20 text-blue-300">
+          <Icon name="lucide:globe" class="size-5" />
+        </span>
+        <span class="text-left leading-tight">
+          <span class="block text-[11px] uppercase tracking-wider text-gray-400">ล่าสุด · live</span>
+          <span class="block text-sm font-semibold">khuianime.com</span>
+        </span>
+      </a>
+      <div class="float-card float-card--alt absolute -top-4 -right-4 md:-right-10 px-4 py-2.5 rounded-2xl bg-gray-900/85 backdrop-blur border border-white/10 shadow-xl text-left leading-tight">
+        <span class="block text-xl font-bold text-[#a78bfa]">100+</span>
+        <span class="block text-[11px] text-gray-400">tickets ในทีมจริง</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech marquee -->
+  <div class="marquee relative mt-16 md:mt-20 max-w-6xl mx-auto w-full overflow-hidden" aria-label="Tech stack">
+    <ul class="marquee-track flex w-max gap-3">
+      {
+        [...TECH, ...TECH].map((t, i) => (
+          <li
+            class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 text-sm whitespace-nowrap"
+            aria-hidden={i >= TECH.length ? "true" : undefined}
+          >
+            <Icon name={t.icon} class="size-4" />
+            {t.name}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </header>
+
+<style>
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  .hero-in {
+    animation: hero-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .float-card { animation: float 5s ease-in-out infinite; }
+  .float-card--alt { animation-delay: -2.5s; }
+
+  .marquee {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  @keyframes marquee {
+    to { transform: translateX(calc(-50% - 0.375rem)); }
+  }
+  .marquee-track { animation: marquee 40s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-in, .float-card { animation: none; }
+    .marquee { mask-image: none; }
+    .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+    .marquee-track li[aria-hidden="true"] { display: none; }
+  }
+</style>

@@ -1,24 +1,55 @@
 ---
+import "@fontsource/ibm-plex-sans-thai/400.css";
+import "@fontsource/ibm-plex-sans-thai/500.css";
+import "@fontsource/ibm-plex-sans-thai/600.css";
+import "@fontsource/ibm-plex-sans-thai/700.css";
 import "../styles/global.css";
 import Navbar from "../components/Navbar/NavBar.astro";
 import Footer from "../components/Footer/Footer.astro";
 import Background from "../components/UI/Background.astro";
-import "aos/dist/aos.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Suchao Mopoku — Full-Stack Developer",
+	description = "Portfolio ของสุเชาว์ หม่อโป๊ะกู่ Full-Stack Developer ทำเว็บตั้งแต่ UX/UI จนขึ้น production: Next.js, TypeScript, PostgreSQL, Docker, Cloudflare",
+} = Astro.props;
+
+// og:image ต้องเป็น URL เต็ม: ใส่ `site` ใน astro.config.mjs เมื่อมีโดเมนแล้ว
+const ogImage = Astro.site ? new URL("/og.png", Astro.site).href : undefined;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="th">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Portfolio Developers</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#030712" />
+		{canonical && <link rel="canonical" href={canonical} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:locale" content="th_TH" />
+		{canonical && <meta property="og:url" content={canonical} />}
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		{ogImage && <meta property="og:image:width" content="1200" />}
+		{ogImage && <meta property="og:image:height" content="630" />}
+		<meta name="twitter:card" content="summary_large_image" />
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 	</head>
 	<body class="text-white">
 		<Background />
 		<Navbar />
 		<slot />
+		<Footer />
 
 		<style is:global>
 			html,
@@ -26,7 +57,7 @@ import "aos/dist/aos.css";
 				overflow-x: hidden;
 			}
 			html {
-				font-family: system-ui, sans-serif;
+				font-family: "IBM Plex Sans Thai", system-ui, sans-serif;
 				scroll-behavior: smooth;
 			}
 
@@ -35,21 +66,45 @@ import "aos/dist/aos.css";
 				padding: 0;
 			}
 
+			/*
+			 * แทน AOS: เนื้อหาไม่ถูกซ่อนรอ JS อีกต่อไป
+			 * - เบราว์เซอร์ที่รองรับ scroll-driven animation: ค่อยๆ โผล่ตอนเลื่อนเข้าจอ
+			 * - เบราว์เซอร์อื่น: เล่น fade สั้นๆ ตอนโหลด
+			 */
+			@keyframes reveal {
+				from {
+					opacity: 0;
+					transform: translateY(16px);
+				}
+				to {
+					opacity: 1;
+					transform: none;
+				}
+			}
+			[data-aos] {
+				animation: reveal 0.5s ease-out both;
+			}
+			[data-aos-delay="100"] { animation-delay: 0.05s; }
+			[data-aos-delay="200"] { animation-delay: 0.1s; }
+			[data-aos-delay="300"] { animation-delay: 0.15s; }
+			[data-aos-delay="400"] { animation-delay: 0.2s; }
+			[data-aos-delay="600"] { animation-delay: 0.3s; }
+			@supports (animation-timeline: view()) {
+				[data-aos] {
+					animation-timeline: view();
+					animation-range: entry 0% entry 35%;
+					animation-delay: 0s;
+				}
+			}
+
 			@media (prefers-reduced-motion: reduce) {
 				html {
 					scroll-behavior: auto;
 				}
+				[data-aos] {
+					animation: none;
+				}
 			}
 		</style>
-
-		<script>
-			import AOS from "aos";
-			AOS.init({
-				duration: 2000,
-				easing: "ease-out-cubic",
-				once: true,
-				offset: 100,
-			});
-		</script>
 	</body>
 </html>

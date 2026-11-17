@@ -1,0 +1,164 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Badge from "../../components/UI/Badge.astro";
+import { Icon } from "astro-icon/components";
+import { TAGS } from "../../data/projects";
+
+const projectTags = [
+    TAGS.NEXT,
+    TAGS.TYPESCRIPT,
+    TAGS.TAILWIND,
+    TAGS.POSTGRESQL,
+    TAGS.DRIZZLE,
+    TAGS.CLOUDFLARE,
+    TAGS.DOCKER,
+    TAGS.GITHUB_ACTIONS,
+];
+
+const shots = [
+    { src: "/projects/khuianime/image.png", alt: "หน้าแรก KhuiAnime" },
+    { src: "/projects/khuianime/anime.png", alt: "คลังอนิเมะและตารางฉาย" },
+    { src: "/projects/khuianime/feed.png", alt: "ฟีดความรู้สึก" },
+];
+
+const sections = [
+    {
+        icon: "lucide:sparkles",
+        title: "Product & UX/UI",
+        items: [
+            "แนวคิดหลัก: โต๊ะคุยรายตอน — คนดูตอนเดียวกันมาคุยกัน และซ่อนสปอยล์ตามความคืบหน้าที่ผู้ใช้ดูแล้ว",
+            "วางเอกสารก่อนเขียนโค้ด: product brief, MVP plan, mood & tone, design system",
+            "Design token แบบ semantic (Light/Dark), ไอคอนชุดเดียว (Lucide), Storybook แยกสำหรับดู component",
+            "ใส่ใจรายละเอียด UX: จัดการ error ของค้นหา/อัปโหลด avatar, mobile nav drawer, grid/list toggle, read-more clamp, ฟอนต์ Thai แบบ local",
+        ],
+    },
+    {
+        icon: "lucide:layers",
+        title: "Foundation & Backend",
+        items: [
+            "Next.js App Router + TypeScript strict, แยกชั้น service / repository",
+            "PostgreSQL + Drizzle ORM พร้อม migration, sync ข้อมูลอนิเมะจาก AniList",
+            "Better Auth แยก User กับ Admin, Google OAuth, rate limit, same-origin check",
+            "หลังบ้าน (admin) จัดการอนิเมะ ตอน รายงาน และสิทธิ์ผู้ใช้",
+            "Open Graph share card สร้างต่อเรื่อง/ตอน (แก้ปัญหาฟอนต์ไทยบน Linux)",
+        ],
+    },
+    {
+        icon: "lucide:cloud",
+        title: "Infra: VPS, Domain, Cloudflare, R2",
+        items: [
+            "รันบน Linux VPS ด้วย Docker Compose: app + PostgreSQL + Caddy (auto-HTTPS)",
+            "โดเมน khuianime.com ผ่าน Cloudflare (DNS/proxy) และตั้ง Caddy ให้เชื่อ IP range ของ Cloudflare เพื่อได้ client IP จริง",
+            "รูปปก/avatar เก็บบน Cloudflare R2 เสิร์ฟผ่าน CDN โดเมนแยก, อัปโหลดด้วย presigned URL, แปลงเป็น WebP + thumbnail",
+            "Security header, health check endpoint, ปรับ container ให้ทำงานบน kernel/AppArmor ของ VPS",
+        ],
+    },
+    {
+        icon: "lucide:workflow",
+        title: "CI/CD & คุณภาพโค้ด",
+        items: [
+            "GitHub Actions: lint + typecheck + unit tests + build, และ job แยกตรวจ migration drift กับ PostgreSQL จริง",
+            "Deploy ผ่าน workflow ที่ SSH เข้า VPS รัน deploy.sh: build → migrate → up → รอ health check พร้อมคำสั่ง rollback เมื่อพัง",
+            "เขียนเทสต์ครอบคลุม service, validation, storage, auth และ DB integration",
+        ],
+    },
+    {
+        icon: "lucide:bot",
+        title: "การทำงานร่วมกับ AI",
+        items: [
+            "พัฒนาด้วย Claude Code ภายใต้กฎของโปรเจกต์ใน .agents/ (design token, icons, work style, ticket workflow)",
+            "แบ่งงานเป็น ticket (KA-xxx) → PR → รีวิว → merge โดยอ่านและเข้าใจโค้ดที่ AI เขียนก่อนเสมอ",
+        ],
+    },
+];
+---
+
+<Layout>
+    <main class="relative z-10 w-full pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
+        <a href="/#projects" class="text-gray-300 hover:text-white flex items-center gap-2 mb-10 w-fit px-4 py-2 rounded-full border border-white/5 bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20">
+            <Icon name="lucide:arrow-left" class="size-4" />
+            Back to Projects
+        </a>
+
+        <div class="mb-16">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-cyan-300 mb-6 tracking-tight">
+                KhuiAnime<br/>คุยอนิเมะ
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-4xl mb-8 font-light">
+                พื้นที่แลกเปลี่ยนความรู้สึกหลังดูอนิเมะแบบแยกตามเรื่องและตอน ปลอดภัยจากสปอยล์ พัฒนาและ deploy ขึ้น production เองตั้งแต่ product, UX/UI, backend, CI/CD จนถึง VPS และโดเมน
+            </p>
+
+            <ul class="flex flex-wrap gap-3 mb-8">
+                {
+                    projectTags.map((tag) => (
+                        <li>
+                            <Badge
+                                class:list={[
+                                    "flex items-center gap-x-2 text-sm py-2 px-4 border-white/10 shadow-lg",
+                                    tag.class,
+                                ]}
+                            >
+                                <Icon name={tag.icon} class="size-4" />
+                                {tag.name}
+                            </Badge>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <a
+                href="https://khuianime.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 text-white bg-gray-800 border border-gray-600 rounded-xl hover:bg-gray-700 hover:border-blue-400/50 transition"
+            >
+                <Icon name="lucide:globe" class="size-4" />
+                khuianime.com
+            </a>
+        </div>
+
+        <div class="space-y-24">
+            <section id="preview" class="scroll-mt-24">
+                <div class="flex items-center gap-4 mb-10 border-b border-white/10 pb-4">
+                    <div class="p-3 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                        <Icon name="lucide:layout-dashboard" class="size-6" />
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">System Preview</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
+                    {
+                        shots.map((s, i) => (
+                            <div
+                                class:list={[
+                                    "group relative overflow-hidden rounded-2xl border border-white/10 bg-gray-900/50 shadow-2xl transition duration-500 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]",
+                                    i === 1 && "lg:translate-y-6",
+                                    i === 2 && "lg:translate-y-12",
+                                ]}
+                            >
+                                <div class="absolute inset-0 bg-linear-to-t from-gray-900/60 to-transparent z-10 pointer-events-none" />
+                                <img src={s.src} alt={s.alt} class="w-full h-full object-cover object-top aspect-4/3 group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" />
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+
+            {
+                sections.map((sec) => (
+                    <section class="scroll-mt-24">
+                        <div class="flex items-center gap-4 mb-8 border-b border-white/10 pb-4">
+                            <div class="p-3 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                                <Icon name={sec.icon} class="size-6" />
+                            </div>
+                            <h2 class="text-3xl font-bold text-white">{sec.title}</h2>
+                        </div>
+                        <ul class="space-y-3 text-lg text-gray-300 font-light leading-relaxed list-disc pl-6 max-w-4xl">
+                            {sec.items.map((it) => <li>{it}</li>)}
+                        </ul>
+                    </section>
+                ))
+            }
+        </div>
+    </main>
+</Layout>

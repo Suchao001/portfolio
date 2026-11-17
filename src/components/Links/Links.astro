@@ -9,7 +9,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class:list={["flex items-center gap-6 mb-6", className]}>
+<div class:list={["flex items-center gap-6", className]}>
     {
         PERSONAL_INFO.socialLinks.map((link: { href: string; label: string; icon: string }) => (
             <a

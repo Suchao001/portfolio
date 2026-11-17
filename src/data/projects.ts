@@ -64,6 +64,26 @@ export const TAGS = {
         class: "bg-white text-black",
         icon: "lucide:triangle",
     },
+    DOCKER: {
+        name: "Docker",
+        class: "bg-[#2496ED]/20 text-[#5cb3f5]",
+        icon: "lucide:container",
+    },
+    CLOUDFLARE: {
+        name: "Cloudflare R2",
+        class: "bg-[#F6821F]/20 text-[#F6821F]",
+        icon: "lucide:cloud",
+    },
+    GITHUB_ACTIONS: {
+        name: "GitHub Actions",
+        class: "bg-[#2088FF]/20 text-[#6cb4ff]",
+        icon: "lucide:workflow",
+    },
+    DRIZZLE: {
+        name: "Drizzle ORM",
+        class: "bg-[#C5F74F]/15 text-[#C5F74F]",
+        icon: "lucide:database",
+    },
     JAVASCRIPT: {
         name: "JavaScript",
         class: "bg-[#F7DF1E]/20 text-[#F7DF1E]",
@@ -82,6 +102,24 @@ export const TAGS = {
 };
 
 export const PROJECTS = [
+    {
+        title: "KhuiAnime | พื้นที่คุยอนิเมะรายตอน ปลอดสปอยล์",
+        description:
+            "เว็บชุมชนให้คนดูอนิเมะมาคุยแยกตามเรื่องและตอน โดยซ่อนสปอยล์ตามความคืบหน้าที่ดูแล้ว พัฒนาและ deploy ขึ้น production เองทั้งระบบภายใน 7 วัน: Next.js + PostgreSQL, auth แยก User/Admin, หลังบ้าน, OG share card, เก็บรูปบน Cloudflare R2 ผ่าน CDN, รันบน VPS ด้วย Docker Compose + Caddy หลัง Cloudflare และมี CI (lint, typecheck, test, migration drift check) ก่อน deploy พัฒนาร่วมกับ AI (Claude Code) พร้อมกฎ design token และ ticket workflow ที่ตรวจโค้ดก่อน merge ทุกครั้ง",
+        link: "/projects/khuianime",
+        liveUrl: "https://khuianime.com",
+        image: "/projects/khuianime/image.png",
+        tags: [
+            TAGS.NEXT,
+            TAGS.TYPESCRIPT,
+            TAGS.TAILWIND,
+            TAGS.POSTGRESQL,
+            TAGS.DRIZZLE,
+            TAGS.CLOUDFLARE,
+            TAGS.DOCKER,
+            TAGS.GITHUB_ACTIONS,
+        ],
+    },
     {
         title: "Goodmeal | AI FoodMenu FoodPlan and Report",
         description:
