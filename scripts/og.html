@@ -11,33 +11,82 @@
   @font-face { font-family: Plex; font-weight: 400; src: url(../node_modules/@fontsource/ibm-plex-sans-thai/files/ibm-plex-sans-thai-thai-400-normal.woff2); }
   @font-face { font-family: Plex; font-weight: 700; src: url(../node_modules/@fontsource/ibm-plex-sans-thai/files/ibm-plex-sans-thai-thai-700-normal.woff2); }
   @font-face { font-family: PlexL; font-weight: 400; src: url(../node_modules/@fontsource/ibm-plex-sans-thai/files/ibm-plex-sans-thai-latin-400-normal.woff2); }
+  @font-face { font-family: PlexL; font-weight: 600; src: url(../node_modules/@fontsource/ibm-plex-sans-thai/files/ibm-plex-sans-thai-latin-600-normal.woff2); }
   @font-face { font-family: PlexL; font-weight: 700; src: url(../node_modules/@fontsource/ibm-plex-sans-thai/files/ibm-plex-sans-thai-latin-700-normal.woff2); }
   * { margin: 0; box-sizing: border-box; }
   body { width: 1200px; height: 630px; overflow: hidden; background: #030712; color: #fff;
-    font-family: PlexL, Plex, sans-serif; display: flex; align-items: center; gap: 64px; padding: 0 80px; position: relative; }
-  .glow { position: absolute; inset: -200px auto auto -200px; width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(120,54,207,.45), transparent 65%); }
-  .glow2 { position: absolute; right: -150px; bottom: -250px; width: 650px; height: 650px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(13,235,216,.25), transparent 65%); }
-  .text { position: relative; flex: 1; }
-  .chip { display: inline-block; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(52,211,153,.4);
-    background: rgba(52,211,153,.12); color: #6ee7b7; font-size: 22px; margin-bottom: 28px; }
-  h1 { font-size: 78px; line-height: 1.1; font-weight: 700; margin-bottom: 12px; }
-  .role { font-size: 40px; font-weight: 700; background: linear-gradient(90deg,#a78bfa,#0debd8);
-    -webkit-background-clip: text; color: transparent; margin-bottom: 24px; }
-  .stack { font-size: 24px; color: #cbd5e1; }
-  img { position: relative; width: 340px; height: 340px; object-fit: cover; border-radius: 48px;
-    border: 2px solid rgba(255,255,255,.15); transform: rotate(2deg); }
+    font-family: PlexL, Plex, sans-serif; position: relative; }
+
+  /* background: grid + glows */
+  .grid { position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 90% at 30% 40%, #000 30%, transparent 75%); }
+  .glow { position: absolute; border-radius: 50%; filter: blur(10px); }
+  .g1 { left: -220px; top: -260px; width: 760px; height: 760px; background: radial-gradient(circle, rgba(120,54,207,.55), transparent 65%); }
+  .g2 { right: -200px; bottom: -300px; width: 760px; height: 760px; background: radial-gradient(circle, rgba(13,235,216,.28), transparent 65%); }
+
+  .wrap { position: relative; height: 100%; padding: 72px 80px; display: grid; grid-template-columns: 1fr 430px; gap: 48px; align-items: center; }
+
+  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 999px;
+    border: 1px solid rgba(52,211,153,.4); background: rgba(52,211,153,.1); color: #6ee7b7; font-size: 20px; margin-bottom: 30px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 5px rgba(52,211,153,.2); }
+  h1 { font-family: Plex, PlexL, sans-serif; font-size: 76px; line-height: 1.05; font-weight: 700; letter-spacing: -1px; margin-bottom: 6px; }
+  .en { font-size: 26px; color: #94a3b8; margin-bottom: 22px; letter-spacing: .5px; }
+  .role { display: inline-block; font-size: 46px; font-weight: 700; letter-spacing: -.5px;
+    background: linear-gradient(90deg,#a78bfa,#0debd8); -webkit-background-clip: text; color: transparent; margin-bottom: 30px; }
+  .tag { font-family: Plex, PlexL, sans-serif; font-size: 25px; color: #cbd5e1; line-height: 1.5; }
+  .tag b { color: #fff; font-weight: 700; }
+
+  /* right: code card */
+  .card { position: relative; border-radius: 22px; background: rgba(17,24,39,.85); border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(167,139,250,.08); transform: rotate(2deg); overflow: hidden; }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+  .bar span { margin-left: 10px; font-size: 15px; color: #64748b; }
+  pre { font-family: "SF Mono", Menlo, monospace; font-size: 17px; line-height: 1.75; padding: 20px 22px 22px; color: #cbd5e1; }
+  .k { color: #c084fc; } .s { color: #5eead4; } .p { color: #94a3b8; } .n { color: #fbbf24; } .c { color: #475569; }
+
+  .live { position: absolute; left: -44px; bottom: -64px; display: flex; align-items: center; gap: 12px; padding: 12px 18px;
+    border-radius: 16px; background: rgba(3,7,18,.92); border: 1px solid rgba(13,235,216,.35); box-shadow: 0 16px 40px rgba(0,0,0,.5); transform: rotate(-2deg); }
+  .live .ic { width: 36px; height: 36px; border-radius: 10px; background: rgba(59,130,246,.2); display: grid; place-items: center; }
+  .live small { display: block; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #64748b; }
+  .live strong { font-size: 18px; font-weight: 600; }
+  .side { position: relative; }
+
 </style>
 </head>
 <body>
-  <div class="glow"></div><div class="glow2"></div>
-  <div class="text">
-    <div class="chip">เปิดรับงาน · Full-time / Freelance</div>
-    <h1>สุเชาว์ หม่อโป๊ะกู่</h1>
-    <div class="role">Full-Stack Developer</div>
-    <div class="stack">Next.js · TypeScript · PostgreSQL · Docker · Cloudflare</div>
+  <div class="grid"></div>
+  <div class="glow g1"></div><div class="glow g2"></div>
+
+  <div class="wrap">
+    <div>
+      <div class="chip"><span class="dot"></span>เปิดรับงาน · Full-time / Freelance</div>
+      <h1>สุเชาว์ หม่อโป๊ะกู่</h1>
+      <div class="en">Suchao Mopoku</div>
+      <div class="role">Full-Stack Developer</div>
+      <div class="tag">ทำเว็บตั้งแต่ <b>UX/UI</b> จนขึ้น <b>production</b> จริง</div>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <div class="bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i><span>suchao.ts</span></div>
+<pre><span class="k">const</span> dev = {
+  role: <span class="s">"Full-Stack"</span>,
+  stack: [<span class="s">"Next.js"</span>, <span class="s">"TypeScript"</span>,
+          <span class="s">"PostgreSQL"</span>, <span class="s">"Docker"</span>],
+  infra: <span class="s">"VPS + Cloudflare R2"</span>,
+  tickets: <span class="n">100</span><span class="p">+</span>,
+  shipsTo: <span class="s">"production"</span>,
+};</pre>
+      </div>
+      <div class="live">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+        <div><small>ล่าสุด · live</small><strong>khuianime.com</strong></div>
+      </div>
+    </div>
   </div>
-  <img src="../public/images/myface1.jpg" alt="" />
 </body>
 </html>
